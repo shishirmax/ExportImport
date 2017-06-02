@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MTD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDatePosted" Type="datetime" />
+          <Property Name="SaleDatePosted" Type="datetime" />
+          <Property Name="SaleItemReference" Type="nvarchar" MaxLength="100" />
+          <Property Name="AttorneyDocket" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="nvarchar" MaxLength="100" />
+          <Property Name="TransactionID" Type="nvarchar" MaxLength="100" />
+          <Property Name="SaleID" Type="nvarchar" MaxLength="100" />
+          <Property Name="FeeCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="FeeCodeDescription" Type="nvarchar(max)" />
+          <Property Name="ItemPrice" Type="money" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="ItemTotal" Type="money" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="MTS">
+          <Key>
+            <PropertyRef Name="CSVReferenceNumber" />
+          </Key>
+          <Property Name="CSVReferenceNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePosted" Type="datetime" />
+          <Property Name="TransactionReference" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttorneyDocket" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPaymentRefund" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="TestDBModelStoreContainer">
+          <EntitySet Name="MTD" EntityType="Self.MTD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MTS" EntityType="Self.MTS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MTD">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDatePosted" Type="DateTime" Precision="3" />
+          <Property Name="SaleDatePosted" Type="DateTime" Precision="3" />
+          <Property Name="SaleItemReference" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyDocket" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SaleID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FeeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FeeCodeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ItemPrice" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="ItemTotal" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MT">
+          <Key>
+            <PropertyRef Name="CSVReferenceNumber" />
+          </Key>
+          <Property Name="CSVReferenceNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+          <Property Name="TransactionReference" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttorneyDocket" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPaymentRefund" Type="String" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="TestDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MTDs" EntityType="Self.MTD" />
+          <EntitySet Name="MTS" EntityType="Self.MT" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities">
+          <EntitySetMapping Name="MTDs">
+            <EntityTypeMapping TypeName="TestDBModel.MTD">
+              <MappingFragment StoreEntitySet="MTD">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentDatePosted" ColumnName="PaymentDatePosted" />
+                <ScalarProperty Name="SaleDatePosted" ColumnName="SaleDatePosted" />
+                <ScalarProperty Name="SaleItemReference" ColumnName="SaleItemReference" />
+                <ScalarProperty Name="AttorneyDocket" ColumnName="AttorneyDocket" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="SaleID" ColumnName="SaleID" />
+                <ScalarProperty Name="FeeCode" ColumnName="FeeCode" />
+                <ScalarProperty Name="FeeCodeDescription" ColumnName="FeeCodeDescription" />
+                <ScalarProperty Name="ItemPrice" ColumnName="ItemPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ItemTotal" ColumnName="ItemTotal" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MTS">
+            <EntityTypeMapping TypeName="TestDBModel.MT">
+              <MappingFragment StoreEntitySet="MTS">
+                <ScalarProperty Name="CSVReferenceNumber" ColumnName="CSVReferenceNumber" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="TransactionReference" ColumnName="TransactionReference" />
+                <ScalarProperty Name="AttorneyDocket" ColumnName="AttorneyDocket" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TotalPaymentRefund" ColumnName="TotalPaymentRefund" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
